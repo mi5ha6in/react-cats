@@ -24,6 +24,7 @@ export const App = () => {
       <button type="button" onClick={getCat}>
         Get cat
       </button>
+      <img alt="" src="https://loremflickr.com/200/200/"/>
     </>
   );
 };
