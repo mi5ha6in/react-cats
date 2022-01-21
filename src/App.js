@@ -4,6 +4,7 @@ import { Checkbox } from "./Checkbox";
 export const App = () => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [isAutoRefresh, setIsAutoRefresh] = useState(false);
+  const getCat = () => console.log('load new Cat');
 
   return (
     <>
@@ -20,6 +21,9 @@ export const App = () => {
         onChange={() => setIsAutoRefresh((isAutoRefresh) => !isAutoRefresh)}
         disabled={!isEnabled}
       />
+      <button type="button" onClick={getCat}>
+        Get cat
+      </button>
     </>
   );
 };
