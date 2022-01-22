@@ -4,11 +4,14 @@ export const getURLRandomCat = async () => {
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
-      throw new Error(`Ошибка запроса по адресу ${apiUrl}, ${apiUrl.status}`);
+      throw new Error(
+        `Error request by ${apiUrl}, status: ${response.status}`
+      );
     }
     const responseJSON = await response.json();
     return responseJSON[0].url;
   } catch (error) {
-    throw new Error(error);
+    console.error(error.message);
+    throw error;
   }
 };
