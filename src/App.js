@@ -5,16 +5,24 @@ import { getURLRandomCat } from "./services/TheCatApi";
 export const App = () => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [isAutoRefresh, setIsAutoRefresh] = useState(false);
-  const [catUrl, setCatUrl] = useState('');
+  const [catURL, setCatUrl] = useState("");
+  const [errorLoadingCat, setErrorLoadingCat] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const catUrl = await getURLRandomCat()
-      setCatUrl(catUrl)
-    }
+      try {
+        const catURL = await getURLRandomCat();
+        setCatUrl(catURL);
+      } catch (error) {
+        setErrorLoadingCat(true);
+      }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
+
+  const errorLoadingCatText = <p>An error has occurred. Kitty won't load</p>;
+  const imgCat = <img alt="Cat" src={catURL} />;
 
   return (
     <>
@@ -31,10 +39,9 @@ export const App = () => {
         onChange={() => setIsAutoRefresh((isAutoRefresh) => !isAutoRefresh)}
         disabled={!isEnabled}
       />
-      <button type="button">
-        Get cat
-      </button>
-      <img alt="" src={catUrl} />
+      <button type="button">Get cat</button>
+
+      {errorLoadingCat ? errorLoadingCatText : imgCat}
     </>
   );
 };
