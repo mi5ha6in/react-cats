@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Checkbox } from "./Checkbox";
+import { Checkbox } from "./components/Checkbox";
 import { getURLRandomCat } from "./services/TheCatApi";
 
 export const App = () => {
