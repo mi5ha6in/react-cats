@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox } from "./Checkbox";
+import { getURLRandomCat } from "./services/TheCatApi";
 
 export const App = () => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [isAutoRefresh, setIsAutoRefresh] = useState(false);
-  const getCat = () => console.log('load new Cat');
+  const [catUrl, setCatUrl] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const catUrl = await getURLRandomCat()
+      setCatUrl(catUrl)
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <>
@@ -21,10 +31,10 @@ export const App = () => {
         onChange={() => setIsAutoRefresh((isAutoRefresh) => !isAutoRefresh)}
         disabled={!isEnabled}
       />
-      <button type="button" onClick={getCat}>
+      <button type="button">
         Get cat
       </button>
-      <img alt="" src="https://loremflickr.com/200/200/"/>
+      <img alt="" src={catUrl} />
     </>
   );
 };
