@@ -1,28 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "./components/Checkbox";
-import { getURLRandomCat } from "./services/TheCatApi";
+import { CatImg } from "./components/CatImg";
+
 
 export const App = () => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [isAutoRefresh, setIsAutoRefresh] = useState(false);
-  const [catURL, setCatUrl] = useState("");
-  const [errorLoadingCat, setErrorLoadingCat] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const catURL = await getURLRandomCat();
-        setCatUrl(catURL);
-      } catch (error) {
-        setErrorLoadingCat(true);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const errorLoadingCatText = <p>An error has occurred. Kitty won't load</p>;
-  const imgCat = <img alt="Cat" src={catURL} />;
 
   return (
     <>
@@ -40,8 +23,7 @@ export const App = () => {
         disabled={!isEnabled}
       />
       <button type="button">Get cat</button>
-
-      {errorLoadingCat ? errorLoadingCatText : imgCat}
+      <CatImg />
     </>
   );
 };
