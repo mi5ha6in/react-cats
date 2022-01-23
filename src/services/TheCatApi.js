@@ -1,6 +1,6 @@
 const apiUrl = "https://api.thecatapi.com/v1/images/search";
 
-export const getURLRandomCat = async () => {
+export const getRandomCatURL = async () => {
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
