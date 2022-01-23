@@ -55,13 +55,12 @@ export const App = () => {
         checked={isEnabled}
         onChange={() => {
           setIsEnabled((isEnable) => !isEnabled);
-          setIsAutoRefresh(false);
         }}
       />
       <Checkbox
         id="refresh"
         label="Auto-refresh every 5 second"
-        checked={isAutoRefresh && isEnabled}
+        checked={isAutoRefresh}
         onChange={() => setIsAutoRefresh((isAutoRefresh) => !isAutoRefresh)}
         disabled={!isEnabled}
       />
