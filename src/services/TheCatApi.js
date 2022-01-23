@@ -4,9 +4,7 @@ export const getRandomCatURL = async () => {
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
-      throw new Error(
-        `Error request by ${apiUrl}, status: ${response.status}`
-      );
+      throw new Error(`Error request by ${apiUrl}, status: ${response.status}`);
     }
     const responseJSON = await response.json();
     return responseJSON[0].url;

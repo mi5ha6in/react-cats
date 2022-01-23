@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { getRandomCatURL } from "./services/TheCatApi";
 import { Checkbox } from "./components/Checkbox";
 import { CatImg } from "./components/CatImg";
-import { getRandomCatURL } from "./services/TheCatApi";
+import { Button } from "./components/Button";
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 16px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 export const App = () => {
   const [isEnabled, setIsEnabled] = useState(true);
@@ -36,7 +48,7 @@ export const App = () => {
   }, [isAutoRefresh]);
 
   return (
-    <>
+    <AppContainer>
       <Checkbox
         id="enabled"
         label="Enabled"
@@ -53,18 +65,18 @@ export const App = () => {
         onChange={() => setIsAutoRefresh((isAutoRefresh) => !isAutoRefresh)}
         disabled={!isEnabled}
       />
-      <button
+      <Button
         type="button"
         disabled={!isEnabled || isAutoRefresh}
         onClick={() => loadCat()}
       >
         Get cat
-      </button>
+      </Button>
       <CatImg
         loadingCatImg={loadingCatImg}
         errorLoadingCat={errorLoadingCat}
         catURL={catURL}
       />
-    </>
+    </AppContainer>
   );
 };
